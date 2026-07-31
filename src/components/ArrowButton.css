@@ -1,0 +1,58 @@
+.arrow-btn-wrap {
+  display: inline-block;
+  border: none;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+  font: inherit;
+}
+
+.arrow-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.arrow-btn-label {
+  font-weight: 700;
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.arrow-btn-circle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--ink);
+  color: #fff;
+  flex-shrink: 0;
+  transition: transform 0.25s ease, background 0.25s ease;
+}
+
+.arrow-btn-wrap:hover .arrow-btn-circle {
+  transform: translateX(4px);
+  background: var(--green);
+}
+
+.arrow-btn-dark .arrow-btn-label {
+  color: var(--ink);
+}
+
+.arrow-btn-light .arrow-btn-label {
+  color: #fff;
+}
+
+.arrow-btn-light .arrow-btn-circle {
+  background: #fff;
+  color: var(--ink);
+}
+
+.arrow-btn-light .arrow-btn-wrap:hover .arrow-btn-circle,
+.arrow-btn-wrap:hover .arrow-btn-light .arrow-btn-circle {
+  background: var(--green-light);
+  color: #fff;
+}

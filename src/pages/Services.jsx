@@ -1,6 +1,6 @@
-import { Link } from 'react-router-dom'
 import { business } from '../data/business'
 import { services } from '../data/services'
+import ArrowButton from '../components/ArrowButton'
 import './Services.css'
 
 function Services() {
@@ -8,7 +8,8 @@ function Services() {
     <div className="services-page">
       <section className="page-hero">
         <div className="container">
-          <h1>Our Tree Care Services</h1>
+          <div className="pill">Our Services</div>
+          <h1>Tree Care for Every Property</h1>
           <p>
             {business.name} offers a full range of professional tree services
             for residential and commercial properties in Buffalo, NY.
@@ -34,9 +35,9 @@ function Services() {
         <div className="container cta-banner-inner">
           <h2>Not Sure Which Service You Need?</h2>
           <p>Contact us for a free consultation and estimate.</p>
-          <Link to="/contact" className="btn btn-outline">
+          <ArrowButton to="/contact" variant="light">
             Get a Free Quote
-          </Link>
+          </ArrowButton>
         </div>
       </section>
     </div>

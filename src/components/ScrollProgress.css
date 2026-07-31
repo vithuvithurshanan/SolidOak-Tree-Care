@@ -1,0 +1,14 @@
+.scroll-progress-track {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--line);
+}
+
+.scroll-progress-bar {
+  height: 100%;
+  background: var(--green);
+  transition: width 0.1s linear;
+}

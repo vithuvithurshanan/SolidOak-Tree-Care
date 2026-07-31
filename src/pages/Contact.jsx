@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { business } from '../data/business'
+import ArrowButton from '../components/ArrowButton'
 import './Contact.css'
 
 function Contact() {
@@ -25,8 +26,9 @@ function Contact() {
     <div className="contact-page">
       <section className="page-hero">
         <div className="container">
-          <h1>Contact {business.name}</h1>
-          <p>Request a free estimate or ask us a question.</p>
+          <div className="pill">Contact Us</div>
+          <h1>Get a Free Estimate</h1>
+          <p>Reach out and we'll follow up quickly.</p>
         </div>
       </section>
 
@@ -89,9 +91,7 @@ function Contact() {
               onChange={handleChange}
             />
 
-            <button type="submit" className="btn btn-primary">
-              Send Request
-            </button>
+            <ArrowButton type="submit">Send Request</ArrowButton>
 
             {sent && (
               <p className="form-note">

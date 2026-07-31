@@ -1,16 +1,17 @@
 .page-hero {
-  background: linear-gradient(135deg, var(--forest) 0%, var(--forest-dark) 100%);
+  background: var(--green);
   color: #fff;
   padding: 72px 0;
   text-align: center;
 }
 
-.page-hero h1 {
-  color: #fff;
+.page-hero .pill {
+  border-color: rgba(255, 255, 255, 0.6);
+  margin-bottom: 16px;
 }
 
-.page-hero p {
-  color: #e3ead7;
+.page-hero h1 {
+  color: #fff;
   margin: 0;
 }
 
@@ -22,9 +23,9 @@
 }
 
 .about-card {
-  background: var(--cream);
-  border: 1px solid #e4ddc9;
-  border-radius: 10px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 14px;
   padding: 32px;
 }
 
@@ -48,14 +49,21 @@
   content: '✓';
   position: absolute;
   left: 0;
-  color: var(--leaf);
+  color: var(--green-light);
   font-weight: 700;
 }
 
 .cta-banner {
-  background: var(--oak-brown);
+  background: var(--rust);
   color: #fff;
   text-align: center;
+}
+
+.cta-banner-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
 }
 
 .cta-banner h2 {
@@ -63,7 +71,7 @@
 }
 
 .cta-banner p {
-  color: #f1e6d9;
+  color: #fbe9df;
 }
 
 @media (max-width: 860px) {

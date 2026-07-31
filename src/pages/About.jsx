@@ -1,5 +1,5 @@
-import { Link } from 'react-router-dom'
 import { business } from '../data/business'
+import ArrowButton from '../components/ArrowButton'
 import './About.css'
 
 function About() {
@@ -7,8 +7,8 @@ function About() {
     <div className="about-page">
       <section className="page-hero">
         <div className="container">
-          <h1>About {business.name}</h1>
-          <p>Buffalo's trusted local tree care team.</p>
+          <div className="pill">About Us</div>
+          <h1>Buffalo's Trusted Local Tree Care Team</h1>
         </div>
       </section>
 
@@ -45,9 +45,9 @@ function About() {
         <div className="container cta-banner-inner">
           <h2>Ready to Work With Us?</h2>
           <p>Reach out today for a free, no-obligation estimate.</p>
-          <Link to="/contact" className="btn btn-outline">
+          <ArrowButton to="/contact" variant="light">
             Contact Us
-          </Link>
+          </ArrowButton>
         </div>
       </section>
     </div>

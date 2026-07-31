@@ -1,6 +1,9 @@
 import { useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import { business } from '../data/business'
+import ScrollProgress from './ScrollProgress'
+import ArrowButton from './ArrowButton'
+import LogoMark from './LogoMark'
 import './Navbar.css'
 
 const links = [
@@ -15,9 +18,11 @@ function Navbar() {
 
   return (
     <header className="navbar">
+      <ScrollProgress />
       <div className="container navbar-inner">
         <NavLink to="/" className="brand" onClick={() => setOpen(false)}>
-          {business.name}
+          <LogoMark />
+          <span>{business.name}</span>
         </NavLink>
 
         <button
@@ -43,9 +48,9 @@ function Navbar() {
               {link.label}
             </NavLink>
           ))}
-          <a href={business.phoneHref} className="btn btn-primary nav-cta">
-            Call {business.phone}
-          </a>
+          <div className="nav-cta">
+            <ArrowButton href={business.phoneHref}>Call {business.phone}</ArrowButton>
+          </div>
         </nav>
       </div>
     </header>

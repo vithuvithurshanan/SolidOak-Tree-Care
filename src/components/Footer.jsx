@@ -1,60 +1,49 @@
 import { Link } from 'react-router-dom'
 import { business } from '../data/business'
+import LogoMark from './LogoMark'
 import './Footer.css'
+
+const footerLinks = [
+  { to: '/services', label: 'Services' },
+  { to: '/about', label: 'About' },
+  { to: '/contact', label: 'Contact' },
+  { to: '/privacy-policy', label: 'Privacy Policy' },
+  { to: '/terms-and-conditions', label: 'Terms & Conditions' },
+]
 
 function Footer() {
   const year = new Date().getFullYear()
 
   return (
     <footer className="footer">
-      <div className="container footer-inner">
-        <div className="footer-col">
-          <h3>{business.name}</h3>
-          <p>
-            Professional, reliable tree care serving Buffalo, NY and the
-            surrounding communities.
-          </p>
+      <div className="container footer-top">
+        <p>
+          Proudly serving Buffalo, NY and the surrounding communities with
+          honest, professional tree care.
+        </p>
+      </div>
+
+      <div className="container footer-main">
+        <div className="footer-location">
+          <div>{business.addressFull}</div>
+          <a href={business.phoneHref}>{business.phone}</a>
         </div>
 
-        <div className="footer-col">
-          <h4>Contact</h4>
-          <p>
-            <a href={business.phoneHref}>{business.phone}</a>
-          </p>
-          <p>
-            <a href={`mailto:${business.email}`}>{business.email}</a>
-          </p>
-          <p>{business.addressFull}</p>
-          <p>{business.hours}</p>
-        </div>
-
-        <div className="footer-col">
-          <h4>Quick Links</h4>
-          <p>
-            <Link to="/services">Services</Link>
-          </p>
-          <p>
-            <Link to="/about">About Us</Link>
-          </p>
-          <p>
-            <Link to="/contact">Contact</Link>
-          </p>
-        </div>
-
-        <div className="footer-col">
-          <h4>Legal</h4>
-          <p>
-            <Link to="/privacy-policy">Privacy Policy</Link>
-          </p>
-          <p>
-            <Link to="/terms-and-conditions">Terms & Conditions</Link>
-          </p>
-        </div>
+        <nav className="footer-nav">
+          {footerLinks.map((link) => (
+            <Link key={link.to} to={link.to}>
+              {link.label}
+            </Link>
+          ))}
+        </nav>
       </div>
 
       <div className="footer-bottom">
-        <div className="container">
-          &copy; {year} {business.name}. All rights reserved.
+        <div className="container footer-bottom-inner">
+          <LogoMark size={40} background="var(--bg)" foreground="var(--green)" />
+          <span>
+            &copy; {year} {business.name}. All rights reserved.
+          </span>
         </div>
       </div>
     </footer>
