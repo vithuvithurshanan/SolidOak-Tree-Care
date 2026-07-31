@@ -20,35 +20,37 @@ function Navbar() {
     <header className="navbar">
       <ScrollProgress />
 
-      <NavLink to="/" className="logo-tab" onClick={() => setOpen(false)}>
-        <LogoMark size={28} />
-        <span>{business.name}</span>
-      </NavLink>
+      <div className="container navbar-bar">
+        <NavLink to="/" className="logo-tab" onClick={() => setOpen(false)}>
+          <LogoMark size={28} />
+          <span>{business.name}</span>
+        </NavLink>
 
-      <button
-        className="nav-toggle-chip"
-        aria-label="Toggle navigation menu"
-        aria-expanded={open}
-        onClick={() => setOpen((prev) => !prev)}
-      >
-        {open ? 'Close' : 'Menu'}
-      </button>
+        <button
+          className="nav-toggle-chip"
+          aria-label="Toggle navigation menu"
+          aria-expanded={open}
+          onClick={() => setOpen((prev) => !prev)}
+        >
+          {open ? 'Close' : 'Menu'}
+        </button>
 
-      <nav className="nav-pill">
-        {links.map((link) => (
-          <NavLink
-            key={link.to}
-            to={link.to}
-            end={link.to === '/'}
-            className={({ isActive }) => (isActive ? 'active' : '')}
-          >
-            {link.label}
-          </NavLink>
-        ))}
-        <div className="nav-pill-cta">
-          <ArrowButton href={business.phoneHref}>Call Now</ArrowButton>
-        </div>
-      </nav>
+        <nav className="nav-pill">
+          {links.map((link) => (
+            <NavLink
+              key={link.to}
+              to={link.to}
+              end={link.to === '/'}
+              className={({ isActive }) => (isActive ? 'active' : '')}
+            >
+              {link.label}
+            </NavLink>
+          ))}
+          <div className="nav-pill-cta">
+            <ArrowButton href={business.phoneHref}>Call Now</ArrowButton>
+          </div>
+        </nav>
+      </div>
 
       {open && (
         <div className="nav-overlay">

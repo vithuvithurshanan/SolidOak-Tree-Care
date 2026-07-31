@@ -61,6 +61,12 @@ img {
   max-width: 780px;
 }
 
+@media (max-width: 560px) {
+  .container {
+    padding: 0 20px;
+  }
+}
+
 h1, h2, h3, h4 {
   font-family: inherit;
   font-weight: 600;

@@ -4,19 +4,26 @@
   left: 0;
   right: 0;
   z-index: 90;
-  height: 0;
+  pointer-events: none;
+}
+
+.navbar-bar.navbar-bar {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding-top: 10px;
+  pointer-events: none;
 }
 
 .logo-tab {
-  position: fixed;
-  top: 3px;
-  left: 0;
+  pointer-events: auto;
   display: flex;
   align-items: center;
   gap: 10px;
   background: var(--bg);
   border-radius: 0 0 var(--radius-md) 0;
   padding: 14px 22px 14px 20px;
+  margin-left: -40px;
   font-weight: 600;
   font-size: 1.05rem;
   color: var(--ink);
@@ -24,9 +31,7 @@
 }
 
 .nav-pill {
-  position: fixed;
-  top: 16px;
-  right: 24px;
+  pointer-events: auto;
   display: flex;
   align-items: center;
   gap: 22px;
@@ -62,9 +67,7 @@
 
 .nav-toggle-chip {
   display: none;
-  position: fixed;
-  top: 12px;
-  right: 16px;
+  pointer-events: auto;
   border-radius: var(--radius-md);
   padding: 9px 16px;
   border: 2px solid var(--chip);
@@ -73,7 +76,6 @@
   font-size: 1rem;
   font-family: inherit;
   cursor: pointer;
-  z-index: 92;
 }
 
 .nav-overlay {
@@ -99,6 +101,7 @@
     z-index: 91;
     background: var(--bg);
     padding: 140px 32px 40px;
+    pointer-events: auto;
   }
 
   .nav-overlay a {
@@ -111,5 +114,11 @@
 
   .nav-overlay-cta {
     margin-top: 24px;
+  }
+}
+
+@media (max-width: 560px) {
+  .logo-tab {
+    margin-left: -20px;
   }
 }
