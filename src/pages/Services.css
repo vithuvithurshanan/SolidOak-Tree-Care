@@ -1,38 +1,19 @@
-.page-hero {
+.page-hero-card {
   background: var(--green);
-  color: #fff;
-  padding: 72px 0;
-  text-align: center;
-}
-
-.page-hero .pill {
-  border-color: rgba(255, 255, 255, 0.6);
-  margin-bottom: 16px;
-}
-
-.page-hero h1 {
-  color: #fff;
-}
-
-.page-hero p {
-  color: #e3ead7;
-  max-width: 640px;
-  margin: 0 auto;
 }
 
 .services-list {
   display: flex;
   flex-direction: column;
-  gap: 32px;
+  gap: 24px;
 }
 
 .service-row {
   display: flex;
   gap: 24px;
   align-items: flex-start;
-  background: #fff;
-  border: 1px solid var(--line);
-  border-radius: 14px;
+  background: var(--card);
+  border-radius: var(--radius-md);
   padding: 28px;
 }
 
@@ -51,13 +32,12 @@
   color: var(--ink-soft);
 }
 
-.cta-banner {
+.cta-banner .cta-banner-inner {
+  border-radius: var(--radius-lg);
   background: var(--rust);
   color: #fff;
   text-align: center;
-}
-
-.cta-banner-inner {
+  padding: 56px 40px;
   display: flex;
   flex-direction: column;
   align-items: center;

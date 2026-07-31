@@ -1,23 +1,5 @@
-.page-hero {
+.page-hero-card {
   background: var(--green);
-  color: #fff;
-  padding: 72px 0;
-  text-align: center;
-}
-
-.page-hero .pill {
-  border-color: rgba(255, 255, 255, 0.6);
-  margin-bottom: 16px;
-}
-
-.page-hero h1 {
-  color: #fff;
-  margin: 0 0 8px;
-}
-
-.page-hero p {
-  color: #e3ead7;
-  margin: 0;
 }
 
 .contact-grid {
@@ -32,9 +14,8 @@
 }
 
 .contact-form {
-  background: #fff;
-  border: 1px solid var(--line);
-  border-radius: 14px;
+  background: var(--card);
+  border-radius: var(--radius-md);
   padding: 32px;
   display: flex;
   flex-direction: column;
@@ -57,6 +38,7 @@
   border-radius: 6px;
   font: inherit;
   resize: vertical;
+  background: #fff;
 }
 
 .contact-form input:focus,

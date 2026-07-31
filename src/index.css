@@ -1,13 +1,19 @@
 :root {
-  --bg: #f7f5ee;
-  --ink: #0f120f;
+  --bg: #f9f8f6;
+  --ink: #0a0a0a;
   --ink-soft: #55564c;
-  --green: #0f3d2b;
+  --green: #005241;
   --green-light: #2f8f63;
-  --olive: #5c5b28;
-  --rust: #a35a35;
+  --olive: #66662a;
+  --rust: #b1653b;
+  --purple: #5757a5;
+  --paleblue: #eaf1fc;
+  --chip: #d9db4d;
+  --charcoal: #2a2c2d;
   --card: #efeade;
-  --line: #ddd6c2;
+  --line: #e4dfcd;
+  --radius-lg: 30px;
+  --radius-md: 20px;
   color-scheme: light;
 }
 
@@ -22,7 +28,7 @@ body {
 }
 
 body {
-  font-family: 'Segoe UI', system-ui, -apple-system, Roboto, Helvetica, Arial, sans-serif;
+  font-family: 'Space Grotesk', 'Segoe UI', system-ui, -apple-system, Roboto, Helvetica, Arial, sans-serif;
   color: var(--ink);
   background: var(--bg);
   line-height: 1.5;
@@ -46,59 +52,65 @@ img {
 
 .container {
   width: 100%;
-  max-width: 1200px;
+  max-width: 1400px;
   margin: 0 auto;
-  padding: 0 24px;
+  padding: 0 40px;
 }
 
 .container.narrow {
-  max-width: 760px;
+  max-width: 780px;
 }
 
 h1, h2, h3, h4 {
   font-family: inherit;
-  font-weight: 800;
+  font-weight: 600;
   color: var(--ink);
   letter-spacing: -0.02em;
-  line-height: 1.08;
+  line-height: 1.05;
   margin: 0 0 16px;
 }
 
 h1 {
-  font-size: clamp(2.4rem, 5vw, 4.2rem);
+  font-size: clamp(2.6rem, 2.1rem + 1.8vw, 4.5rem);
 }
 
 h2 {
-  font-size: clamp(1.7rem, 3.2vw, 2.6rem);
+  font-size: clamp(1.8rem, 1.5rem + 1.2vw, 2.75rem);
 }
 
 h3 {
-  font-size: 1.4rem;
+  font-size: 1.5rem;
 }
 
 p {
   margin: 0 0 16px;
 }
 
-/* Eyebrow pill label, used above section headings */
+/* Eyebrow pill / chip label used above headings and for checklist badges */
 .pill {
   display: inline-flex;
   align-items: center;
-  border: 1px solid currentColor;
+  border: 1px solid var(--ink);
   border-radius: 999px;
-  padding: 6px 16px;
-  font-size: 0.78rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
+  padding: 5px 14px;
+  font-size: 1rem;
+  font-weight: 500;
 }
 
 main {
   flex: 1;
+  padding-top: 92px;
 }
 
 section {
-  padding: 88px 0;
+  padding: 0;
+  margin: 90px 0;
+}
+
+@media (max-width: 860px) {
+  section {
+    margin: 56px 0;
+  }
 }
 
 .section-title {
@@ -118,7 +130,7 @@ section {
   display: inline-block;
   padding: 14px 28px;
   border-radius: 999px;
-  font-weight: 700;
+  font-weight: 600;
   border: 2px solid transparent;
   cursor: pointer;
   transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
@@ -147,13 +159,10 @@ section {
 /* Horizontal scroll-snap gallery, used for services/projects showcases */
 .scroll-gallery {
   display: flex;
-  gap: 20px;
+  gap: 16px;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   padding-bottom: 12px;
-  margin: 0 -24px;
-  padding-left: 24px;
-  padding-right: 24px;
 }
 
 .scroll-gallery::-webkit-scrollbar {
@@ -168,6 +177,35 @@ section {
 .scroll-gallery > * {
   scroll-snap-align: start;
   flex: 0 0 auto;
+}
+
+/* Rounded bento-card hero used on secondary pages */
+.page-hero-card {
+  border-radius: var(--radius-lg);
+  padding: 64px 48px;
+  color: #fff;
+  text-align: center;
+}
+
+.page-hero-card .pill {
+  border-color: rgba(255, 255, 255, 0.6);
+  margin-bottom: 16px;
+}
+
+.page-hero-card h1 {
+  color: #fff;
+}
+
+.page-hero-card p {
+  color: #e3ead7;
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+@media (max-width: 560px) {
+  .page-hero-card {
+    padding: 48px 24px;
+  }
 }
 
 .legal-page {
@@ -198,6 +236,6 @@ section {
 }
 
 .legal-page a {
-  color: var(--green-light);
+  color: var(--green);
   text-decoration: underline;
 }

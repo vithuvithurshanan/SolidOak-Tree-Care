@@ -7,7 +7,7 @@ function Services() {
   return (
     <div className="services-page">
       <section className="page-hero">
-        <div className="container">
+        <div className="container page-hero-card">
           <div className="pill">Our Services</div>
           <h1>Tree Care for Every Property</h1>
           <p>

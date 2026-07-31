@@ -16,34 +16,35 @@ function Footer() {
 
   return (
     <footer className="footer">
-      <div className="container footer-top">
-        <p>
-          Proudly serving Buffalo, NY and the surrounding communities with
-          honest, professional tree care.
-        </p>
-      </div>
+      <div className="container">
+        <div className="footer-panel">
+          <div className="footer-blurb">
+            <p>
+              Proudly serving Buffalo, NY and the surrounding communities
+              with honest, professional tree care.
+            </p>
+            <div className="footer-location">
+              <div>{business.addressFull}</div>
+              <a href={business.phoneHref}>{business.phone}</a>
+            </div>
+          </div>
 
-      <div className="container footer-main">
-        <div className="footer-location">
-          <div>{business.addressFull}</div>
-          <a href={business.phoneHref}>{business.phone}</a>
-        </div>
+          <div className="footer-links">
+            <nav className="footer-nav">
+              {footerLinks.map((link) => (
+                <Link key={link.to} to={link.to}>
+                  {link.label}
+                </Link>
+              ))}
+            </nav>
 
-        <nav className="footer-nav">
-          {footerLinks.map((link) => (
-            <Link key={link.to} to={link.to}>
-              {link.label}
-            </Link>
-          ))}
-        </nav>
-      </div>
-
-      <div className="footer-bottom">
-        <div className="container footer-bottom-inner">
-          <LogoMark size={40} background="var(--bg)" foreground="var(--green)" />
-          <span>
-            &copy; {year} {business.name}. All rights reserved.
-          </span>
+            <div className="footer-bottom">
+              <LogoMark size={44} background="#fff" foreground="var(--green)" />
+              <span>
+                &copy; {year} {business.name}. All rights reserved.
+              </span>
+            </div>
+          </div>
         </div>
       </div>
     </footer>

@@ -1,17 +1,8 @@
-.page-hero {
+.page-hero-card {
   background: var(--green);
-  color: #fff;
-  padding: 72px 0;
-  text-align: center;
 }
 
-.page-hero .pill {
-  border-color: rgba(255, 255, 255, 0.6);
-  margin-bottom: 16px;
-}
-
-.page-hero h1 {
-  color: #fff;
+.page-hero-card h1 {
   margin: 0;
 }
 
@@ -24,8 +15,7 @@
 
 .about-card {
   background: var(--card);
-  border: 1px solid var(--line);
-  border-radius: 14px;
+  border-radius: var(--radius-md);
   padding: 32px;
 }
 
@@ -53,13 +43,12 @@
   font-weight: 700;
 }
 
-.cta-banner {
+.cta-banner .cta-banner-inner {
+  border-radius: var(--radius-lg);
   background: var(--rust);
   color: #fff;
   text-align: center;
-}
-
-.cta-banner-inner {
+  padding: 56px 40px;
   display: flex;
   flex-direction: column;
   align-items: center;

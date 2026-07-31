@@ -19,40 +19,56 @@ function Navbar() {
   return (
     <header className="navbar">
       <ScrollProgress />
-      <div className="container navbar-inner">
-        <NavLink to="/" className="brand" onClick={() => setOpen(false)}>
-          <LogoMark />
-          <span>{business.name}</span>
-        </NavLink>
 
-        <button
-          className="nav-toggle"
-          aria-label="Toggle navigation menu"
-          aria-expanded={open}
-          onClick={() => setOpen((prev) => !prev)}
-        >
-          <span />
-          <span />
-          <span />
-        </button>
+      <NavLink to="/" className="logo-tab" onClick={() => setOpen(false)}>
+        <LogoMark size={28} />
+        <span>{business.name}</span>
+      </NavLink>
 
-        <nav className={`nav-links ${open ? 'open' : ''}`}>
+      <button
+        className="nav-toggle-chip"
+        aria-label="Toggle navigation menu"
+        aria-expanded={open}
+        onClick={() => setOpen((prev) => !prev)}
+      >
+        {open ? 'Close' : 'Menu'}
+      </button>
+
+      <nav className="nav-pill">
+        {links.map((link) => (
+          <NavLink
+            key={link.to}
+            to={link.to}
+            end={link.to === '/'}
+            className={({ isActive }) => (isActive ? 'active' : '')}
+          >
+            {link.label}
+          </NavLink>
+        ))}
+        <div className="nav-pill-cta">
+          <ArrowButton href={business.phoneHref}>Call Now</ArrowButton>
+        </div>
+      </nav>
+
+      {open && (
+        <div className="nav-overlay">
           {links.map((link) => (
             <NavLink
               key={link.to}
               to={link.to}
               end={link.to === '/'}
-              className={({ isActive }) => (isActive ? 'active' : '')}
               onClick={() => setOpen(false)}
             >
               {link.label}
             </NavLink>
           ))}
-          <div className="nav-cta">
-            <ArrowButton href={business.phoneHref}>Call {business.phone}</ArrowButton>
+          <div className="nav-overlay-cta">
+            <ArrowButton href={business.phoneHref}>
+              Call {business.phone}
+            </ArrowButton>
           </div>
-        </nav>
-      </div>
+        </div>
+      )}
     </header>
   )
 }

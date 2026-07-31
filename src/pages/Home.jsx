@@ -7,6 +7,8 @@ import { projects } from '../data/projects'
 import ArrowButton from '../components/ArrowButton'
 import './Home.css'
 
+const tileColors = ['green', 'rust', 'olive']
+
 function Home() {
   const [tickerIndex, setTickerIndex] = useState(0)
 
@@ -20,13 +22,13 @@ function Home() {
   return (
     <>
       <section className="hero">
-        <div className="container hero-inner">
-          <div className="hero-title">
+        <div className="container hero-flex">
+          <div className="hero-media">
             <h1>Rooted care, trusted results.</h1>
             <p>
-              {business.name} keeps Buffalo, NY properties safe and beautiful
-              with expert tree removal, trimming, and emergency storm
-              response.
+              {business.name} keeps Buffalo, NY properties safe and
+              beautiful with expert tree removal, trimming, and emergency
+              storm response.
             </p>
             <button
               type="button"
@@ -38,26 +40,25 @@ function Home() {
               }
             >
               <span className="scroll-btn-circle">↓</span>
-              <span>See our services</span>
             </button>
           </div>
 
-          <div className="hero-stats">
-            {stats.map((stat) => (
-              <div className="hero-stat" key={stat.label}>
-                <span className="hero-stat-value">{stat.value}</span>
-                <span className="hero-stat-label">{stat.label}</span>
-              </div>
-            ))}
-          </div>
-        </div>
+          <div className="hero-details">
+            <div className="hero-stats-card">
+              {stats.map((stat) => (
+                <div className="hero-stat" key={stat.label}>
+                  <span className="hero-stat-value">{stat.value}</span>
+                  <span className="hero-stat-label">{stat.label}</span>
+                </div>
+              ))}
+            </div>
 
-        <div className="hero-cta-strip">
-          <div className="container hero-cta-strip-inner">
-            <h5>Need tree work done? Click here.</h5>
-            <ArrowButton to="/contact" variant="light">
-              Get a Free Quote
-            </ArrowButton>
+            <div className="hero-cta-card">
+              <h5>Want tree work done? Click here.</h5>
+              <ArrowButton to="/contact" variant="light">
+                Get a Free Quote
+              </ArrowButton>
+            </div>
           </div>
         </div>
 
@@ -82,18 +83,21 @@ function Home() {
       <section id="services-showcase" className="services-showcase">
         <div className="container">
           <div className="pill">Our Services</div>
-        </div>
-        <div className="container">
           <div className="scroll-gallery services-gallery">
-            {services.map((service) => (
-              <div className="service-tile" key={service.slug}>
-                <div className="service-tile-image">
+            {services.map((service, index) => (
+              <div
+                className={`service-tile service-tile-${tileColors[index % tileColors.length]}`}
+                key={service.slug}
+              >
+                <div className="service-tile-medallion">
                   <span aria-hidden="true">{service.icon}</span>
                 </div>
                 <h4>{service.title}</h4>
-                <ArrowButton to="/services" variant="light">
-                  Learn More
-                </ArrowButton>
+                <div className="service-tile-btn">
+                  <ArrowButton to="/services" variant="light">
+                    Learn More
+                  </ArrowButton>
+                </div>
               </div>
             ))}
           </div>
@@ -101,73 +105,84 @@ function Home() {
       </section>
 
       <section className="feature-band">
-        <div className="container feature-inner">
-          <ul className="feature-checklist">
-            <li>
-              <h4>Licensed, insured tree care professionals</h4>
-            </li>
-            <li>
-              <h4>Same-day emergency storm response</h4>
-            </li>
-            <li>
-              <h4>Upfront pricing, free estimates</h4>
-            </li>
-            <li>
-              <h4>Full cleanup — we leave it spotless</h4>
-            </li>
-          </ul>
-          <ArrowButton to="/about" variant="light">
-            How We Help
-          </ArrowButton>
+        <div className="container">
+          <div className="feature-card">
+            <ul className="feature-checklist">
+              <li>
+                <h4>Licensed, insured tree care professionals</h4>
+              </li>
+              <li>
+                <h4>Same-day emergency storm response</h4>
+              </li>
+              <li>
+                <h4>Upfront pricing, free estimates</h4>
+              </li>
+              <li>
+                <h4>Full cleanup — we leave it spotless</h4>
+              </li>
+            </ul>
+            <div className="feature-button">
+              <ArrowButton to="/about" variant="light">
+                How we help
+              </ArrowButton>
+            </div>
+          </div>
         </div>
       </section>
 
       <section className="testimonials-grid">
         <div className="container">
           <div className="pill">What Buffalo Says</div>
-        </div>
-        <div className="container testimonials-cols">
-          {testimonials.map((item) => (
-            <div className="testimonial-card" key={item.name}>
-              <p>{item.quote}</p>
-              <span className="testimonial-name">— {item.name}</span>
+          <div className="testimonials-bento">
+            <div className="testimonial-cell testimonial-cell-rust">
+              <div className="testimonial-medallion" />
+              <p>{testimonials[0].quote}</p>
+              <span className="testimonial-name">— {testimonials[0].name}</span>
             </div>
-          ))}
+            <div className="testimonial-cell testimonial-cell-green">
+              <p>{testimonials[1].quote}</p>
+              <span className="testimonial-name">— {testimonials[1].name}</span>
+            </div>
+            <div className="testimonial-cell testimonial-cell-olive">
+              <p>{testimonials[2].quote}</p>
+              <span className="testimonial-name">— {testimonials[2].name}</span>
+            </div>
+          </div>
         </div>
       </section>
 
       <section className="projects-slider">
         <div className="container">
           <h2 className="section-title">Recent Work</h2>
-        </div>
-        <div className="container">
           <div className="scroll-gallery projects-gallery">
             {projects.map((project) => (
-              <div className="project-card" key={project.title}>
-                <div className="pill">{project.category}</div>
-                <h4>{project.title}</h4>
-                <p>{project.excerpt}</p>
+              <div className="project-pair" key={project.title}>
+                <div className="project-image-block" />
+                <div className="project-detail-block">
+                  <div className="pill">{project.category}</div>
+                  <h4>{project.title}</h4>
+                  <p>{project.excerpt}</p>
+                </div>
               </div>
             ))}
-          </div>
-          <div className="projects-cta">
-            <ArrowButton to="/services">See All Services</ArrowButton>
           </div>
         </div>
       </section>
 
       <section className="estimate-band">
-        <div className="container estimate-inner">
-          <div className="estimate-copy">
-            <h3>Get on our schedule. Reach out today.</h3>
-            <p>
-              Tell us what you need and we'll follow up quickly with a free
-              estimate.
-            </p>
+        <div className="container">
+          <div className="estimate-card">
+            <div className="estimate-copy">
+              <h3>Get on our schedule. Reach out today.</h3>
+              <p>
+                Tell us what you need and we'll follow up quickly with a free
+                estimate.
+              </p>
+            </div>
+            <ArrowButton to="/contact" variant="light">
+              Request a Quote
+            </ArrowButton>
           </div>
-          <ArrowButton to="/contact" variant="light">
-            Request a Quote
-          </ArrowButton>
         </div>
       </section>
     </>

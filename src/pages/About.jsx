@@ -6,7 +6,7 @@ function About() {
   return (
     <div className="about-page">
       <section className="page-hero">
-        <div className="container">
+        <div className="container page-hero-card">
           <div className="pill">About Us</div>
           <h1>Buffalo's Trusted Local Tree Care Team</h1>
         </div>
