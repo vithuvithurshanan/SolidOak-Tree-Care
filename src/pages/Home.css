@@ -12,7 +12,7 @@
   display: flex;
   gap: 16px;
   align-items: stretch;
-  min-height: calc(100svh - 92px);
+  min-height: 100svh;
 }
 
 .hero-media {

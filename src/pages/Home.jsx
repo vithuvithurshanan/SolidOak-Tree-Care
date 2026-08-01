@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { business } from '../data/business'
 import { services } from '../data/services'
-import { stats, testimonialTicker } from '../data/stats'
+import { stats } from '../data/stats'
 import { testimonials } from '../data/testimonials'
 import { projects } from '../data/projects'
 import ArrowButton from '../components/ArrowButton'
@@ -10,7 +10,6 @@ import './Home.css'
 const tileColors = ['green', 'rust', 'olive']
 
 function Home() {
-  const [tickerIndex, setTickerIndex] = useState(0)
   const [formState, setFormState] = useState({
     name: '',
     phone: '',
@@ -18,13 +17,6 @@ function Home() {
     message: '',
   })
   const [sent, setSent] = useState(false)
-
-  useEffect(() => {
-    const id = setInterval(() => {
-      setTickerIndex((prev) => (prev + 1) % testimonialTicker.length)
-    }, 4000)
-    return () => clearInterval(id)
-  }, [])
 
   const handleFormSubmit = (e) => {
     e.preventDefault()
@@ -106,14 +98,7 @@ function Home() {
           </div>
         </div>
 
-        {/* Bottom Ticker */}
-        <div className="hero-ticker">
-          <div className="container">
-            <p key={tickerIndex} className="hero-ticker-text">
-              {testimonialTicker[tickerIndex]}
-            </p>
-          </div>
-        </div>
+
       </section>
 
 
