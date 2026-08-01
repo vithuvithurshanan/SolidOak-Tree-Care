@@ -84,8 +84,7 @@ function PrivacyPolicy() {
         <p>
           If you need assistance, reply <strong>HELP</strong> to any message,
           or contact us directly at{' '}
-          <a href={business.phoneHref}>{business.phone}</a> or{' '}
-          <a href={`mailto:${business.email}`}>{business.email}</a>.
+          <a href={business.phoneHref}>{business.phone}</a>.
         </p>
 
         <h2>3. Mobile Information &amp; SMS Consent — No Third-Party Sharing</h2>
@@ -162,8 +161,6 @@ function PrivacyPolicy() {
           {business.addressFull}
           <br />
           Phone: <a href={business.phoneHref}>{business.phone}</a>
-          <br />
-          Email: <a href={`mailto:${business.email}`}>{business.email}</a>
         </p>
       </div>
     </div>

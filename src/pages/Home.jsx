@@ -1,40 +1,66 @@
-import { useState } from 'react'
+import { useRef, useEffect, useState } from 'react'
 import { business } from '../data/business'
 import { services } from '../data/services'
 import { stats } from '../data/stats'
 import { testimonials } from '../data/testimonials'
 import { projects } from '../data/projects'
+import { usePageTitle } from '../hooks/usePageTitle'
 import ArrowButton from '../components/ArrowButton'
 import './Home.css'
 
 const tileColors = ['green', 'rust', 'olive']
 
 function Home() {
-  const [formState, setFormState] = useState({
-    name: '',
-    phone: '',
-    service: 'Tree Removal',
-    message: '',
-  })
-  const [sent, setSent] = useState(false)
+  usePageTitle('Buffalo Tree Care — Removal, Trimming & Emergency Service')
 
-  const handleFormSubmit = (e) => {
-    e.preventDefault()
-    const subject = encodeURIComponent(
-      `Tree Service Quote Request: ${formState.service} (${formState.name})`
-    )
-    const body = encodeURIComponent(
-      `Name: ${formState.name}\nPhone: ${formState.phone}\nService Needed: ${formState.service}\n\nNotes:\n${formState.message}`
-    )
-    window.location.href = `mailto:${business.email}?subject=${subject}&body=${body}`
-    setSent(true)
-  }
+  // Load KDLead embed script once
+  useEffect(() => {
+    const existing = document.getElementById('kdlead-embed-script')
+    if (existing) return
+    const script = document.createElement('script')
+    script.id = 'kdlead-embed-script'
+    script.src = 'https://link.kdlead.com/js/form_embed.js'
+    script.async = true
+    document.body.appendChild(script)
+  }, [])
+
+  // Scroll-scrubbed sticky notes for Why Choose Us
+  const sectionRef = useRef(null)
+  const [visibleCount, setVisibleCount] = useState(0)
+
+  const checklistItems = [
+    'Licensed, insured tree care professionals',
+    'Same-day emergency storm response',
+    'Upfront pricing, free estimates',
+    'Full cleanup — we leave it spotless',
+  ]
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const el = sectionRef.current
+      if (!el) return
+      const rect = el.getBoundingClientRect()
+      const sectionH = el.offsetHeight
+      const winH = window.innerHeight
+      const scrolled = -rect.top
+      const scrollable = sectionH - winH
+      const progress = Math.max(0, Math.min(1, scrolled / scrollable))
+      const count = Math.min(
+        checklistItems.length,
+        Math.floor(progress * (checklistItems.length + 1))
+      )
+      setVisibleCount(count)
+    }
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    handleScroll()
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [checklistItems.length])
 
   return (
     <>
+      {/* Hero */}
       <section id="hero" className="hero">
         <div className="container hero-flex">
-          {/* Main Left Hero Card */}
           <div className="hero-media">
             <div className="pill pill-light">Buffalo, NY Tree Care</div>
             <h1>
@@ -61,16 +87,13 @@ function Home() {
             </button>
           </div>
 
-          {/* Right Hero Details Stack */}
           <div className="hero-details">
-            {/* Top Stats Card with CALL NOW */}
             <div className="hero-stats-card">
               <div className="stats-card-header">
                 <ArrowButton href={business.phoneHref} variant="dark">
                   CALL NOW
                 </ArrowButton>
               </div>
-
               <div className="stats-list">
                 {stats.map((stat) => (
                   <div className="hero-stat" key={stat.label}>
@@ -81,7 +104,6 @@ function Home() {
               </div>
             </div>
 
-            {/* Bottom Olive CTA Card */}
             <div className="hero-cta-card">
               <h5>Want tree work done? Click here.</h5>
               <ArrowButton
@@ -97,11 +119,9 @@ function Home() {
             </div>
           </div>
         </div>
-
-
       </section>
 
-
+      {/* Intro */}
       <section className="intro-statement">
         <div className="container narrow">
           <h2>
@@ -111,6 +131,7 @@ function Home() {
         </div>
       </section>
 
+      {/* Services showcase */}
       <section id="services-showcase" className="services-showcase">
         <div className="container">
           <div className="pill">Our Services</div>
@@ -136,34 +157,39 @@ function Home() {
         </div>
       </section>
 
-      <section id="about-section" className="feature-band">
-        <div className="container">
-          <div className="feature-card">
-            <div className="pill pill-light">Why Choose Us</div>
-            <h2>Built on Safety, Speed &amp; Integrity</h2>
-            <ul className="feature-checklist">
-              <li>
-                <h4>Licensed, insured tree care professionals</h4>
-              </li>
-              <li>
-                <h4>Same-day emergency storm response</h4>
-              </li>
-              <li>
-                <h4>Upfront pricing, free estimates</h4>
-              </li>
-              <li>
-                <h4>Full cleanup — we leave it spotless</h4>
-              </li>
-            </ul>
-            <div className="feature-button">
-              <ArrowButton to="/about" variant="light">
-                How we help
-              </ArrowButton>
+      {/* Why Choose Us — sticky scroll */}
+      <section id="about-section" className="feature-band" ref={sectionRef}>
+        <div className="feature-sticky-wrap">
+          <div className="container">
+            <div className="feature-card">
+              <div className="pill pill-light">Why Choose Us</div>
+              <h2>Built on Safety, Speed &amp; Integrity</h2>
+              <ul className="feature-checklist">
+                {checklistItems.map((text, i) => (
+                  <li
+                    key={text}
+                    className={`sticky-note sticky-note-${i} ${i < visibleCount ? 'checklist-visible' : ''}`}
+                    style={{
+                      transitionDelay: i < visibleCount
+                        ? `${i * 100}ms`
+                        : `${(checklistItems.length - 1 - i) * 60}ms`,
+                    }}
+                  >
+                    <h4>{text}</h4>
+                  </li>
+                ))}
+              </ul>
+              <div className={`feature-button ${visibleCount === checklistItems.length ? 'checklist-visible' : ''}`}>
+                <ArrowButton to="/about" variant="light">
+                  How we help
+                </ArrowButton>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
+      {/* Testimonials */}
       <section id="testimonials" className="testimonials-grid">
         <div className="container">
           <div className="pill">What Buffalo Says</div>
@@ -185,6 +211,7 @@ function Home() {
         </div>
       </section>
 
+      {/* Projects */}
       <section id="projects" className="projects-slider">
         <div className="container">
           <div className="pill" style={{ marginBottom: '16px' }}>Our Work</div>
@@ -210,7 +237,7 @@ function Home() {
         </div>
       </section>
 
-
+      {/* Contact — KDLead form */}
       <section id="contact" className="estimate-band">
         <div className="container">
           <div className="estimate-card">
@@ -218,69 +245,28 @@ function Home() {
               <div className="pill pill-light">Free Estimate</div>
               <h3>Get on our schedule. Reach out today.</h3>
               <p>
-                Tell us what you need and we'll follow up quickly with a free
+                Fill out the form and we'll follow up quickly with a free
                 estimate.
               </p>
-
-              <form className="home-quick-form" onSubmit={handleFormSubmit}>
-                <div className="form-row">
-                  <input
-                    type="text"
-                    placeholder="Your Name"
-                    required
-                    value={formState.name}
-                    onChange={(e) =>
-                      setFormState({ ...formState, name: e.target.value })
-                    }
-                  />
-                  <input
-                    type="tel"
-                    placeholder="Phone Number"
-                    required
-                    value={formState.phone}
-                    onChange={(e) =>
-                      setFormState({ ...formState, phone: e.target.value })
-                    }
-                  />
-                </div>
-                <div className="form-row">
-                  <select
-                    value={formState.service}
-                    onChange={(e) =>
-                      setFormState({ ...formState, service: e.target.value })
-                    }
-                  >
-                    {services.map((s) => (
-                      <option key={s.slug} value={s.title}>
-                        {s.title}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-                <div className="form-row">
-                  <textarea
-                    rows="3"
-                    placeholder="Describe your tree job..."
-                    required
-                    value={formState.message}
-                    onChange={(e) =>
-                      setFormState({ ...formState, message: e.target.value })
-                    }
-                  />
-                </div>
-                <ArrowButton type="submit" variant="light">
-                  Request Free Estimate
-                </ArrowButton>
-
-                {sent && (
-                  <p className="form-sent-msg">
-                    Opening your email app! Or call us directly at{' '}
-                    <a href={business.phoneHref} style={{ color: '#fff', underline: 'always' }}>
-                      {business.phone}
-                    </a>
-                  </p>
-                )}
-              </form>
+            </div>
+            <div className="estimate-form-wrap">
+              <iframe
+                src="https://link.kdlead.com/widget/form/WYr7Z9l4MmFaS5Ov88km"
+                style={{ width: '100%', height: '877px', border: 'none', borderRadius: '8px' }}
+                id="inline-WYr7Z9l4MmFaS5Ov88km"
+                data-layout='{"id":"INLINE"}'
+                data-trigger-type="alwaysShow"
+                data-trigger-value=""
+                data-activation-type="alwaysActivated"
+                data-activation-value=""
+                data-deactivation-type="neverDeactivate"
+                data-deactivation-value=""
+                data-form-name="SolidOak Tree Care"
+                data-height="877"
+                data-layout-iframe-id="inline-WYr7Z9l4MmFaS5Ov88km"
+                data-form-id="WYr7Z9l4MmFaS5Ov88km"
+                title="SolidOak Tree Care"
+              />
             </div>
           </div>
         </div>
@@ -290,4 +276,3 @@ function Home() {
 }
 
 export default Home
-

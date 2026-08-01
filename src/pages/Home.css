@@ -293,13 +293,29 @@
   display: none;
 }
 
-/* Feature band */
+/* Feature band — sticky scroll section */
+.feature-band {
+  /* Tall enough so each note gets its own scroll "beat" */
+  height: 300vh;
+  position: relative;
+}
+
+.feature-sticky-wrap {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
 .feature-card {
   border-radius: var(--radius-lg);
   background: linear-gradient(160deg, #101312 0%, var(--green) 140%);
   color: #fff;
   padding: 72px 40px;
-  min-height: 50vh;
+  width: 100%;
+  min-height: 80vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -323,32 +339,121 @@
   gap: 12px;
 }
 
-.feature-checklist li:nth-child(odd) {
-  transform: rotate(-1.5deg);
+/* Base hidden state — fall from above */
+.feature-checklist li {
+  opacity: 0;
+  transform: translateY(-60px) rotate(-6deg) scale(0.88);
+  transition:
+    opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.feature-checklist li:nth-child(even) {
-  transform: rotate(1.5deg);
+/* Visible state — landed, slight tilt like a real sticky note */
+.feature-checklist li.checklist-visible:nth-child(odd) {
+  opacity: 1;
+  transform: rotate(-1.8deg) translateY(0) scale(1);
+}
+
+.feature-checklist li.checklist-visible:nth-child(even) {
+  opacity: 1;
+  transform: rotate(1.8deg) translateY(0) scale(1);
 }
 
 .feature-checklist li:hover {
-  transform: rotate(0deg) scale(1.03);
-  transition: transform 0.2s ease;
+  transform: rotate(0deg) scale(1.04) translateY(0) !important;
+  transition: transform 0.2s ease !important;
+  z-index: 2;
 }
 
+/* Sticky note style */
 .feature-checklist h4 {
-  color: #eae9dc;
-  background: var(--olive);
-  padding: 12px 24px;
-  border-radius: var(--radius-md);
+  color: #3a3000;
+  background: #f5e642;
+  padding: 14px 28px;
+  border-radius: 3px;
   white-space: nowrap;
   font-size: 1.15rem;
   margin: 0;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  box-shadow:
+    3px 3px 8px rgba(0, 0, 0, 0.25),
+    0 1px 0 rgba(0, 0, 0, 0.08) inset;
+  position: relative;
+  font-family: 'Georgia', serif;
+  letter-spacing: 0.01em;
 }
 
+@media (max-width: 860px) {
+  .feature-band {
+    height: auto;
+    min-height: unset;
+  }
+
+  .feature-sticky-wrap {
+    position: relative;
+    top: unset;
+    height: auto;
+    min-height: unset;
+    padding: 40px 0;
+  }
+
+  .feature-card {
+    min-height: unset;
+    padding: 48px 24px;
+    gap: 24px;
+  }
+
+  .feature-checklist {
+    width: 100%;
+    align-items: stretch;
+  }
+
+  /* On mobile, all notes visible immediately — no scroll scrub */
+  .feature-checklist li {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  .feature-checklist li:nth-child(odd) {
+    transform: rotate(-1.5deg) !important;
+  }
+
+  .feature-checklist li:nth-child(even) {
+    transform: rotate(1.5deg) !important;
+  }
+
+  .feature-checklist h4 {
+    white-space: normal;
+    word-break: break-word;
+    font-size: 1rem;
+    padding: 12px 18px;
+    text-align: center;
+  }
+
+  .feature-button {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
+/* Slightly different tints for variety */
+.sticky-note-0 h4 { background: #f5e642; }
+.sticky-note-1 h4 { background: #85e89d; color: #0a2e0a; }
+.sticky-note-2 h4 { background: #f5b8a0; color: #3a0f00; }
+.sticky-note-3 h4 { background: #a8d8f0; color: #082040; }
+
+/* Feature button — also animates in */
 .feature-button {
   margin-top: 16px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.4s ease 0.1s, transform 0.4s ease 0.1s;
+}
+
+.feature-button.checklist-visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .feature-button .arrow-btn-label {
@@ -486,13 +591,16 @@
   font-size: 0.9rem;
 }
 
-/* Estimate band & Single-page Contact Form */
+/* Estimate band — KDLead form */
 .estimate-card {
   border-radius: var(--radius-lg);
   background: var(--rust);
   color: #fff;
-  padding: 56px 40px;
+  padding: 56px 40px 40px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
 }
 
 .estimate-copy {
@@ -508,64 +616,18 @@
 
 .estimate-copy p {
   color: #fbe9df;
-  margin: 0 0 28px;
+  margin: 0;
   font-size: 1.1rem;
 }
 
-.home-quick-form {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-  max-width: 720px;
-  margin-top: 20px;
-}
-
-.home-quick-form .form-row {
-  display: flex;
-  gap: 12px;
-}
-
-.home-quick-form input,
-.home-quick-form select,
-.home-quick-form textarea {
-  flex: 1;
-  padding: 12px 18px;
-  border-radius: 999px;
-  border: 1px solid rgba(255, 255, 255, 0.4);
-  background: rgba(255, 255, 255, 0.15);
-  color: #fff;
-  font: inherit;
-  font-size: 0.95rem;
-}
-
-.home-quick-form textarea {
-  border-radius: var(--radius-md);
-  resize: vertical;
-}
-
-.home-quick-form input::placeholder,
-.home-quick-form textarea::placeholder {
-  color: rgba(255, 255, 255, 0.7);
-}
-
-.home-quick-form select option {
-  color: var(--ink);
+.estimate-form-wrap {
   background: #fff;
-}
-
-.home-quick-form input:focus,
-.home-quick-form select:focus,
-.home-quick-form textarea:focus {
-  outline: 2px solid #fff;
-  background: rgba(255, 255, 255, 0.25);
-}
-
-.form-sent-msg {
-  margin-top: 14px;
-  font-size: 0.95rem;
-  background: rgba(0, 0, 0, 0.2);
-  padding: 12px 18px;
   border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.estimate-form-wrap iframe {
+  display: block;
 }
 
 @media (max-width: 860px) {
@@ -617,6 +679,11 @@
 
   .home-quick-form input {
     width: 100%;
+  }
+
+  /* Hide scroll button on mobile — not needed when layout stacks */
+  .scroll-btn {
+    display: none;
   }
 }
 

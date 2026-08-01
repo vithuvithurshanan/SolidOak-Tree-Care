@@ -24,8 +24,6 @@ function Terms() {
           {business.addressFull}
           <br />
           Phone: <a href={business.phoneHref}>{business.phone}</a>
-          <br />
-          Email: <a href={`mailto:${business.email}`}>{business.email}</a>
         </p>
 
         <h2>2. Age Requirement</h2>
@@ -78,8 +76,7 @@ function Terms() {
         <p>
           For help at any time, reply <strong>HELP</strong> to any message,
           or contact us directly at{' '}
-          <a href={business.phoneHref}>{business.phone}</a> or{' '}
-          <a href={`mailto:${business.email}`}>{business.email}</a>.
+          <a href={business.phoneHref}>{business.phone}</a>.
         </p>
 
         <h3>4f. Carrier Liability Disclaimer</h3>
@@ -157,8 +154,6 @@ function Terms() {
           {business.addressFull}
           <br />
           Phone: <a href={business.phoneHref}>{business.phone}</a>
-          <br />
-          Email: <a href={`mailto:${business.email}`}>{business.email}</a>
         </p>
       </div>
     </div>

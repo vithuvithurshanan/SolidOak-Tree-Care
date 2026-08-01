@@ -1,37 +1,93 @@
-.page-hero-card {
-  background: var(--green);
+.services-hero-card {
+  background: linear-gradient(160deg, #101312 0%, var(--green) 120%);
 }
 
-.services-list {
+/* Services grid — 2 col bento layout */
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.service-card {
+  border-radius: var(--radius-lg);
+  padding: 40px 36px 36px;
+  color: #fff;
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 16px;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.service-row {
+.service-card:hover {
+  transform: translateY(-4px);
+}
+
+.service-card-green   { background: var(--green); }
+.service-card-rust    { background: var(--rust); }
+.service-card-olive   { background: var(--olive); }
+.service-card-charcoal { background: var(--charcoal); }
+
+.service-card-top {
   display: flex;
-  gap: 24px;
-  align-items: flex-start;
-  background: var(--card);
-  border-radius: var(--radius-md);
-  padding: 28px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
 }
 
-.service-row-icon {
-  font-size: 2rem;
-  flex-shrink: 0;
+.service-card-icon {
+  font-size: 2.4rem;
+  line-height: 1;
 }
 
-.service-row h2 {
-  margin-bottom: 8px;
-  font-size: 1.3rem;
+.service-card-pill {
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
 }
 
-.service-row p {
+.service-card h2 {
+  color: #fff;
   margin: 0;
-  color: var(--ink-soft);
+  font-size: clamp(1.3rem, 1rem + 0.8vw, 1.7rem);
 }
 
+.service-card-desc {
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 0.95rem;
+  line-height: 1.55;
+  margin: 0;
+  flex: 1;
+}
+
+.service-card-bullets {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.service-card-bullets li {
+  font-size: 0.88rem;
+  color: rgba(255, 255, 255, 0.88);
+  padding-left: 20px;
+  position: relative;
+  line-height: 1.4;
+}
+
+.service-card-bullets li::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  opacity: 0.7;
+}
+
+.service-card-cta {
+  margin-top: 8px;
+}
+
+/* CTA banner */
 .cta-banner .cta-banner-inner {
   border-radius: var(--radius-lg);
   background: var(--rust);
@@ -46,14 +102,20 @@
 
 .cta-banner h2 {
   color: #fff;
+  margin: 0;
 }
 
 .cta-banner p {
   color: #fbe9df;
+  margin: 0;
 }
 
-@media (max-width: 560px) {
-  .service-row {
-    flex-direction: column;
+@media (max-width: 860px) {
+  .services-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .service-card {
+    padding: 32px 24px 28px;
   }
 }

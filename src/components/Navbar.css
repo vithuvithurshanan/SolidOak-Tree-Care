@@ -141,6 +141,10 @@
   font-size: 0.88rem;
 }
 
+.mobile-toggle-wrap {
+  pointer-events: auto;
+}
+
 .header-menu-btn {
   display: none;
   border-radius: 20px;
@@ -151,6 +155,7 @@
   font-weight: 600;
   font-family: inherit;
   cursor: pointer;
+  pointer-events: auto;
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
 }
 

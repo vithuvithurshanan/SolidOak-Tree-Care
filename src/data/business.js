@@ -1,8 +1,7 @@
 export const business = {
-  name: 'City Roots Tree Services',
+  name: 'Solid Oak Tree Care',
   phone: '716-599-8785',
   phoneHref: 'tel:+17165998785',
-  email: 'info@cityrootstreeservices.com',
   address: {
     line1: '216 Jewett Ave',
     city: 'Buffalo',

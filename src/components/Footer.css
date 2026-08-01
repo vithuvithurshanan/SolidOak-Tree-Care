@@ -70,5 +70,15 @@
 
   .footer-bottom {
     margin-top: 24px;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .footer-nav {
+    gap: 12px 20px;
+  }
+
+  .footer-blurb p {
+    font-size: 0.95rem;
   }
 }

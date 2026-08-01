@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { NavLink, useLocation } from 'react-router-dom'
+import { NavLink, useLocation, useNavigate } from 'react-router-dom'
 import { business } from '../data/business'
 import ScrollProgress from './ScrollProgress'
 import LogoMark from './LogoMark'
@@ -8,28 +8,46 @@ import './Navbar.css'
 
 const navItems = [
   { label: 'Home', path: '/', hash: '#hero' },
-  { label: 'Services', path: '/services', hash: '#services-showcase' },
-  { label: 'About', path: '/about', hash: '#about-section' },
+  { label: 'Services', path: '/services', hash: null },
+  { label: 'About', path: '/about', hash: null },
   { label: 'Reviews', path: '/', hash: '#testimonials' },
   { label: 'Work', path: '/', hash: '#projects' },
-  { label: 'Contact', path: '/contact', hash: '#contact' },
+  { label: 'Contact', path: '/contact', hash: null },
 ]
 
 function Navbar() {
   const [open, setOpen] = useState(false)
   const location = useLocation()
+  const navigate = useNavigate()
 
   const handleNavClick = (e, item) => {
+    e.preventDefault()
     setOpen(false)
-    if (location.pathname === '/' && item.hash) {
-      e.preventDefault()
-      const element = document.querySelector(item.hash)
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' })
+
+    if (item.hash) {
+      // Item has a hash target
+      if (location.pathname === '/') {
+        // Already on home — just scroll
+        const el = document.querySelector(item.hash)
+        if (el) el.scrollIntoView({ behavior: 'smooth' })
+        else window.scrollTo({ top: 0, behavior: 'smooth' })
       } else {
-        window.scrollTo({ top: 0, behavior: 'smooth' })
+        // Navigate to home first, then scroll after paint
+        navigate('/')
+        setTimeout(() => {
+          const el = document.querySelector(item.hash)
+          if (el) el.scrollIntoView({ behavior: 'smooth' })
+        }, 100)
       }
+    } else {
+      navigate(item.path)
     }
+  }
+
+  const getHref = (item) => {
+    if (item.hash && location.pathname === '/') return item.hash
+    if (item.hash) return `/${item.hash}`
+    return item.path
   }
 
   return (
@@ -61,15 +79,15 @@ function Navbar() {
         <nav className="header-nav">
           <ul>
             {navItems.map((item) => {
-              const isActive =
-                location.pathname === item.path &&
-                (!item.hash || location.hash === item.hash)
+              const isActive = item.hash
+                ? location.pathname === '/'
+                : location.pathname === item.path
               return (
                 <li key={item.label}>
                   <a
-                    href={location.pathname === '/' ? item.hash : item.path}
+                    href={getHref(item)}
                     onClick={(e) => handleNavClick(e, item)}
-                    className={isActive ? 'active' : ''}
+                    className={isActive && !item.hash ? 'active' : ''}
                   >
                     {item.label}
                   </a>
@@ -99,7 +117,7 @@ function Navbar() {
             {navItems.map((item) => (
               <li key={item.label}>
                 <a
-                  href={location.pathname === '/' ? item.hash : item.path}
+                  href={getHref(item)}
                   onClick={(e) => handleNavClick(e, item)}
                 >
                   {item.label}

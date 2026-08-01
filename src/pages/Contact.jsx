@@ -1,32 +1,27 @@
-import { useState } from 'react'
+import { useEffect } from 'react'
 import { business } from '../data/business'
-import ArrowButton from '../components/ArrowButton'
+import { usePageTitle } from '../hooks/usePageTitle'
 import './Contact.css'
 
 function Contact() {
-  const [form, setForm] = useState({ name: '', phone: '', message: '' })
-  const [sent, setSent] = useState(false)
+  usePageTitle('Contact Us — Free Estimate')
 
-  const handleChange = (event) => {
-    const { name, value } = event.target
-    setForm((prev) => ({ ...prev, [name]: value }))
-  }
-
-  const handleSubmit = (event) => {
-    event.preventDefault()
-    const subject = encodeURIComponent(`Quote Request from ${form.name}`)
-    const body = encodeURIComponent(
-      `Name: ${form.name}\nPhone: ${form.phone}\n\nMessage:\n${form.message}`
-    )
-    window.location.href = `mailto:${business.email}?subject=${subject}&body=${body}`
-    setSent(true)
-  }
+  // Load KDLead embed script once
+  useEffect(() => {
+    const existing = document.getElementById('kdlead-embed-script')
+    if (existing) return
+    const script = document.createElement('script')
+    script.id = 'kdlead-embed-script'
+    script.src = 'https://link.kdlead.com/js/form_embed.js'
+    script.async = true
+    document.body.appendChild(script)
+  }, [])
 
   return (
     <div className="contact-page">
       <section className="page-hero">
-        <div className="container page-hero-card">
-          <div className="pill">Contact Us</div>
+        <div className="container page-hero-card contact-hero-card">
+          <div className="pill pill-light">Contact Us</div>
           <h1>Get a Free Estimate</h1>
           <p>Reach out and we'll follow up quickly.</p>
         </div>
@@ -34,15 +29,13 @@ function Contact() {
 
       <section>
         <div className="container contact-grid">
+
+          {/* Left — contact info */}
           <div className="contact-info">
             <h2>Get In Touch</h2>
             <p>
               <strong>Phone:</strong>{' '}
               <a href={business.phoneHref}>{business.phone}</a>
-            </p>
-            <p>
-              <strong>Email:</strong>{' '}
-              <a href={`mailto:${business.email}`}>{business.email}</a>
             </p>
             <p>
               <strong>Address:</strong>
@@ -59,48 +52,27 @@ function Contact() {
             </p>
           </div>
 
-          <form className="contact-form" onSubmit={handleSubmit}>
-            <h2>Request a Free Estimate</h2>
-            <label htmlFor="name">Name</label>
-            <input
-              id="name"
-              name="name"
-              type="text"
-              required
-              value={form.name}
-              onChange={handleChange}
+          {/* Right — KDLead embedded form */}
+          <div className="contact-form-wrap">
+            <iframe
+              src="https://link.kdlead.com/widget/form/WYr7Z9l4MmFaS5Ov88km"
+              style={{ width: '100%', height: '877px', border: 'none', borderRadius: '8px' }}
+              id="inline-WYr7Z9l4MmFaS5Ov88km"
+              data-layout='{"id":"INLINE"}'
+              data-trigger-type="alwaysShow"
+              data-trigger-value=""
+              data-activation-type="alwaysActivated"
+              data-activation-value=""
+              data-deactivation-type="neverDeactivate"
+              data-deactivation-value=""
+              data-form-name="SolidOak Tree Care"
+              data-height="877"
+              data-layout-iframe-id="inline-WYr7Z9l4MmFaS5Ov88km"
+              data-form-id="WYr7Z9l4MmFaS5Ov88km"
+              title="SolidOak Tree Care"
             />
+          </div>
 
-            <label htmlFor="phone">Phone</label>
-            <input
-              id="phone"
-              name="phone"
-              type="tel"
-              required
-              value={form.phone}
-              onChange={handleChange}
-            />
-
-            <label htmlFor="message">How can we help?</label>
-            <textarea
-              id="message"
-              name="message"
-              rows="5"
-              required
-              value={form.message}
-              onChange={handleChange}
-            />
-
-            <ArrowButton type="submit">Send Request</ArrowButton>
-
-            {sent && (
-              <p className="form-note">
-                Your email app should now be open with your message ready to
-                send. Prefer to talk now? Call us at{' '}
-                <a href={business.phoneHref}>{business.phone}</a>.
-              </p>
-            )}
-          </form>
         </div>
       </section>
     </div>

@@ -1,17 +1,17 @@
 export const testimonials = [
   {
+    name: 'Karen M., Amherst',
     quote:
-      '"SolidOak took down a massive dead oak leaning over our garage. Careful, quick, and cleaned up everything."',
-    name: 'Buffalo homeowner',
+      'They took down a huge oak that was leaning toward our roof. Professional, fast, and the yard was spotless when they left. Highly recommend.',
   },
   {
+    name: 'Dave R., South Buffalo',
     quote:
-      '"They showed up within hours after a storm dropped a limb on our fence. Can’t recommend them enough."',
-    name: 'West Side resident',
+      'Called after a storm knocked a limb onto my fence. They were out the same day. Fair price, great work.',
   },
   {
+    name: 'Linda T., Williamsville',
     quote:
-      '"Upfront pricing, no surprises, and our trees have never looked healthier after their pruning work."',
-    name: 'Elmwood Village property owner',
+      'Trimmed three big maples and did stump grinding. Crew was friendly and knew exactly what they were doing.',
   },
 ]
