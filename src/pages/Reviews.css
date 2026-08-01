@@ -1,0 +1,79 @@
+.reviews-hero-card {
+  background: linear-gradient(160deg, #101312 0%, var(--rust) 140%);
+}
+
+.reviews-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.review-card {
+  border-radius: var(--radius-lg);
+  padding: 40px 32px;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.review-card:hover {
+  transform: translateY(-4px);
+}
+
+.review-card-rust     { background: var(--rust); }
+.review-card-green    { background: var(--green); }
+.review-card-olive    { background: var(--olive); }
+.review-card-charcoal { background: var(--charcoal); }
+
+.review-card-icon {
+  font-size: 2rem;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.review-quote {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 500;
+  line-height: 1.6;
+  color: rgba(255,255,255,0.92);
+  font-style: italic;
+  flex: 1;
+}
+
+.review-name {
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  opacity: 0.75;
+}
+
+/* CTA banner */
+.cta-banner .cta-banner-inner {
+  border-radius: var(--radius-lg);
+  background: var(--rust);
+  color: #fff;
+  text-align: center;
+  padding: 56px 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.cta-banner h2 { color: #fff; margin: 0; }
+.cta-banner p  { color: #fbe9df; margin: 0; }
+
+@media (max-width: 860px) {
+  .reviews-grid {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 
-const SITE = 'City Roots Tree Services'
+const SITE = 'Solid Oak Tree Care'
 
 export function usePageTitle(title) {
   useEffect(() => {

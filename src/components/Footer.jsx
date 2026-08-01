@@ -4,8 +4,11 @@ import LogoMark from './LogoMark'
 import './Footer.css'
 
 const footerLinks = [
+  { to: '/', label: 'Home' },
   { to: '/services', label: 'Services' },
   { to: '/about', label: 'About' },
+  { to: '/reviews', label: 'Reviews' },
+  { to: '/work', label: 'Our Work' },
   { to: '/contact', label: 'Contact' },
   { to: '/privacy-policy', label: 'Privacy Policy' },
   { to: '/terms-and-conditions', label: 'Terms & Conditions' },
@@ -39,7 +42,7 @@ function Footer() {
             </nav>
 
             <div className="footer-bottom">
-              <LogoMark size={44} background="#fff" foreground="var(--green)" />
+              <LogoMark size={120} />
               <span>
                 &copy; {year} {business.name}. All rights reserved.
               </span>

@@ -13,17 +13,6 @@ const tileColors = ['green', 'rust', 'olive']
 function Home() {
   usePageTitle('Buffalo Tree Care — Removal, Trimming & Emergency Service')
 
-  // Load KDLead embed script once
-  useEffect(() => {
-    const existing = document.getElementById('kdlead-embed-script')
-    if (existing) return
-    const script = document.createElement('script')
-    script.id = 'kdlead-embed-script'
-    script.src = 'https://link.kdlead.com/js/form_embed.js'
-    script.async = true
-    document.body.appendChild(script)
-  }, [])
-
   // Scroll-scrubbed sticky notes for Why Choose Us
   const sectionRef = useRef(null)
   const [visibleCount, setVisibleCount] = useState(0)
@@ -233,41 +222,6 @@ function Home() {
                 </div>
               </div>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Contact — KDLead form */}
-      <section id="contact" className="estimate-band">
-        <div className="container">
-          <div className="estimate-card">
-            <div className="estimate-copy">
-              <div className="pill pill-light">Free Estimate</div>
-              <h3>Get on our schedule. Reach out today.</h3>
-              <p>
-                Fill out the form and we'll follow up quickly with a free
-                estimate.
-              </p>
-            </div>
-            <div className="estimate-form-wrap">
-              <iframe
-                src="https://link.kdlead.com/widget/form/WYr7Z9l4MmFaS5Ov88km"
-                style={{ width: '100%', height: '877px', border: 'none', borderRadius: '8px' }}
-                id="inline-WYr7Z9l4MmFaS5Ov88km"
-                data-layout='{"id":"INLINE"}'
-                data-trigger-type="alwaysShow"
-                data-trigger-value=""
-                data-activation-type="alwaysActivated"
-                data-activation-value=""
-                data-deactivation-type="neverDeactivate"
-                data-deactivation-value=""
-                data-form-name="SolidOak Tree Care"
-                data-height="877"
-                data-layout-iframe-id="inline-WYr7Z9l4MmFaS5Ov88km"
-                data-form-id="WYr7Z9l4MmFaS5Ov88km"
-                title="SolidOak Tree Care"
-              />
-            </div>
           </div>
         </div>
       </section>

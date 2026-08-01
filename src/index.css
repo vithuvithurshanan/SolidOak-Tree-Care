@@ -231,33 +231,52 @@ section[id] {
 }
 
 /* Rounded bento-card hero used on secondary pages */
+.page-hero {
+  margin: 0 !important;
+  padding-top: 0;
+}
+
+.page-hero > .container {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
 .page-hero-card {
   border-radius: var(--radius-lg);
-  padding: 64px 48px;
+  padding: 80px 64px;
   color: #fff;
   text-align: center;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+  min-height: 340px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  width: 87%;
 }
 
 .page-hero-card .pill {
   border-color: rgba(255, 255, 255, 0.6);
-  margin-bottom: 16px;
 }
 
 .page-hero-card h1 {
   color: #fff;
+  margin: 0;
 }
 
 .page-hero-card p {
-  color: #e3ead7;
-  max-width: 640px;
-  margin: 0 auto;
+  color: rgba(255, 255, 255, 0.82);
+  max-width: 580px;
+  margin: 0;
   font-size: 1.15rem;
+  line-height: 1.55;
 }
 
 @media (max-width: 560px) {
   .page-hero-card {
-    padding: 48px 24px;
+    padding: 56px 24px;
+    min-height: 260px;
   }
 }
 
