@@ -1,20 +1,34 @@
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 import { business } from '../data/business'
 import { usePageTitle } from '../hooks/usePageTitle'
 import './Contact.css'
 
 function Contact() {
   usePageTitle('Contact Us — Free Estimate')
+  const formRef = useRef(null)
 
-  // Load KDLead embed script once
+  // Load KDLead script only when iframe is visible in viewport
   useEffect(() => {
-    const existing = document.getElementById('kdlead-embed-script')
-    if (existing) return
-    const script = document.createElement('script')
-    script.id = 'kdlead-embed-script'
-    script.src = 'https://link.kdlead.com/js/form_embed.js'
-    script.async = true
-    document.body.appendChild(script)
+    const el = formRef.current
+    if (!el) return
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) return
+        observer.disconnect()
+        const existing = document.getElementById('kdlead-embed-script')
+        if (existing) return
+        const script = document.createElement('script')
+        script.id = 'kdlead-embed-script'
+        script.src = 'https://link.kdlead.com/js/form_embed.js'
+        script.async = true
+        script.defer = true
+        document.body.appendChild(script)
+      },
+      { threshold: 0.1 }
+    )
+    observer.observe(el)
+    return () => observer.disconnect()
   }, [])
 
   return (
@@ -53,7 +67,7 @@ function Contact() {
           </div>
 
           {/* Right — KDLead embedded form */}
-          <div className="contact-form-wrap">
+          <div className="contact-form-wrap" ref={formRef}>
             <iframe
               src="https://link.kdlead.com/widget/form/WYr7Z9l4MmFaS5Ov88km"
               style={{ width: '100%', height: '877px', border: 'none', borderRadius: '8px' }}

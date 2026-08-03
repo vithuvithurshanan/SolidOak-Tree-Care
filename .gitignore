@@ -16,7 +16,6 @@ dist-ssr
 reference-docs/
 
 # Editor directories and files
-.vscode/*
 !.vscode/extensions.json
 .idea
 .DS_Store
@@ -25,3 +24,4 @@ reference-docs/
 *.njsproj
 *.sln
 *.sw?
+config.bat
