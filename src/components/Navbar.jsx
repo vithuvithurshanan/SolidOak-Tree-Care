@@ -32,26 +32,32 @@ function Navbar() {
   useEffect(() => {
     if (location.pathname !== '/') return
 
-    const onScroll = () => {
-      const trigger = window.innerHeight * 0.4
+    let rafId = null
 
-      // Walk sections from bottom to top — first one whose top is above trigger wins
-      let found = HOME_SECTIONS[0]
-      for (let i = HOME_SECTIONS.length - 1; i >= 0; i--) {
-        const el = document.getElementById(HOME_SECTIONS[i].id)
-        if (!el) continue
-        const top = el.getBoundingClientRect().top
-        if (top <= trigger) {
-          found = HOME_SECTIONS[i]
-          break
+    const onScroll = () => {
+      if (rafId) return
+      rafId = requestAnimationFrame(() => {
+        rafId = null
+        const trigger = window.innerHeight * 0.4
+        let found = HOME_SECTIONS[0]
+        for (let i = HOME_SECTIONS.length - 1; i >= 0; i--) {
+          const el = document.getElementById(HOME_SECTIONS[i].id)
+          if (!el) continue
+          if (el.getBoundingClientRect().top <= trigger) {
+            found = HOME_SECTIONS[i]
+            break
+          }
         }
-      }
-      setActiveLabel(found.label)
+        setActiveLabel(found.label)
+      })
     }
 
     window.addEventListener('scroll', onScroll, { passive: true })
     onScroll()
-    return () => window.removeEventListener('scroll', onScroll)
+    return () => {
+      window.removeEventListener('scroll', onScroll)
+      if (rafId) cancelAnimationFrame(rafId)
+    }
   }, [location.pathname])
 
   // Reset when leaving home

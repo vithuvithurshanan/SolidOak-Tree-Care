@@ -25,24 +25,32 @@ function Home() {
   ]
 
   useEffect(() => {
+    let rafId = null
     const handleScroll = () => {
-      const el = sectionRef.current
-      if (!el) return
-      const rect = el.getBoundingClientRect()
-      const sectionH = el.offsetHeight
-      const winH = window.innerHeight
-      const scrolled = -rect.top
-      const scrollable = sectionH - winH
-      const progress = Math.max(0, Math.min(1, scrolled / scrollable))
-      const count = Math.min(
-        checklistItems.length,
-        Math.floor(progress * (checklistItems.length + 1))
-      )
-      setVisibleCount(count)
+      if (rafId) return
+      rafId = requestAnimationFrame(() => {
+        rafId = null
+        const el = sectionRef.current
+        if (!el) return
+        const rect = el.getBoundingClientRect()
+        const sectionH = el.offsetHeight
+        const winH = window.innerHeight
+        const scrolled = -rect.top
+        const scrollable = sectionH - winH
+        const progress = Math.max(0, Math.min(1, scrolled / scrollable))
+        const count = Math.min(
+          checklistItems.length,
+          Math.floor(progress * (checklistItems.length + 1))
+        )
+        setVisibleCount(count)
+      })
     }
     window.addEventListener('scroll', handleScroll, { passive: true })
     handleScroll()
-    return () => window.removeEventListener('scroll', handleScroll)
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+      if (rafId) cancelAnimationFrame(rafId)
+    }
   }, [checklistItems.length])
 
   return (
@@ -51,29 +59,40 @@ function Home() {
       <section id="hero" className="hero">
         <div className="container hero-flex">
           <div className="hero-media">
-            <div className="pill pill-light">Buffalo, NY Tree Care</div>
-            <h1>
-              Rooted care,
-              <br />
-              trusted results.
-            </h1>
-            <p>
-              City Roots Tree Services keeps Buffalo properties safe and
-              beautiful with expert tree removal, trimming, stump grinding, and
-              emergency storm response.
-            </p>
-            <button
-              type="button"
-              className="scroll-btn"
-              aria-label="Scroll down to services"
-              onClick={() =>
-                document
-                  .getElementById('services-showcase')
-                  ?.scrollIntoView({ behavior: 'smooth' })
-              }
-            >
-              <span className="scroll-btn-circle">↓</span>
-            </button>
+            {/* LCP image — inline img so browser discovers immediately */}
+            <img
+              src="/images/hero.webp"
+              alt=""
+              aria-hidden="true"
+              fetchpriority="high"
+              decoding="sync"
+              className="hero-bg-img"
+            />
+            <div className="hero-media-content">
+              <div className="pill pill-light">Buffalo, NY Tree Care</div>
+              <h1>
+                Rooted care,
+                <br />
+                trusted results.
+              </h1>
+              <p>
+                Solid Oak Tree Care keeps Buffalo properties safe and
+                beautiful with expert tree removal, trimming, stump grinding, and
+                emergency storm response.
+              </p>
+              <button
+                type="button"
+                className="scroll-btn"
+                aria-label="Scroll down to services"
+                onClick={() =>
+                  document
+                    .getElementById('services-showcase')
+                    ?.scrollIntoView({ behavior: 'smooth' })
+                }
+              >
+                <span className="scroll-btn-circle">↓</span>
+              </button>
+            </div>
           </div>
 
           <div className="hero-details">

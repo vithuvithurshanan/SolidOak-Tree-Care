@@ -4,17 +4,43 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/webp" href="/images/logo.webp" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="x-dns-prefetch-control" content="on" />
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
     <meta
       name="description"
-      content="SolidOak Tree Care provides professional tree removal, trimming, stump grinding, and emergency storm cleanup in Buffalo, NY."
+      content="Solid Oak Tree Care provides professional tree removal, trimming, stump grinding, and emergency storm cleanup in Buffalo, NY."
     />
     <title>SolidOak Tree Care | Buffalo, NY Tree Service</title>
+    <!-- Critical inline CSS — prevents FOUC on hero/navbar before bundle loads -->
+    <style>
+      *{box-sizing:border-box}
+      html,body{margin:0;padding:0}
+      body{font-family:'Space Grotesk','Segoe UI',system-ui,sans-serif;background:#f9f8f6;color:#0a0a0a;line-height:1.5}
+      #root{min-height:100svh;display:flex;flex-direction:column}
+      .header-bar{width:100%;position:fixed;z-index:100;top:10px;left:0;right:0;pointer-events:none}
+      .hero{margin:0!important}
+      .hero-flex{display:flex;gap:16px;align-items:stretch;min-height:100svh}
+      .hero-media{flex:1;border-radius:30px;position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end}
+      .hero-bg-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+      .hero-media::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,50,40,.45) 0%,rgba(4,30,25,.85) 100%);z-index:1}
+      .hero-media-content{position:relative;z-index:2;color:#fff;padding:48px;display:flex;flex-direction:column;justify-content:flex-end;gap:22px;flex:1}
+    </style>
+    <link rel="preload" as="image" href="/images/hero.webp" fetchpriority="high" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap"
       rel="stylesheet"
+      media="print"
+      onload="this.media='all'"
     />
+    <noscript>
+      <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+      />
+    </noscript>
   </head>
   <body>
     <div id="root"></div>
