@@ -10,11 +10,12 @@ function ArrowIcon() {
   )
 }
 
-function ArrowButton({ to, href, onClick, type = 'button', variant = 'dark', children }) {
+function ArrowButton({ to, href, onClick, type = 'button', variant = 'dark', children, ariaLabel }) {
+  const label = ariaLabel || (typeof children === 'string' ? children : undefined)
   const content = (
     <span className={`arrow-btn arrow-btn-${variant}`}>
       <span className="arrow-btn-label">{children}</span>
-      <span className="arrow-btn-circle">
+      <span className="arrow-btn-circle" aria-hidden="true">
         <ArrowIcon />
       </span>
     </span>
@@ -22,7 +23,7 @@ function ArrowButton({ to, href, onClick, type = 'button', variant = 'dark', chi
 
   if (to) {
     return (
-      <Link to={to} className="arrow-btn-wrap">
+      <Link to={to} className="arrow-btn-wrap" aria-label={label}>
         {content}
       </Link>
     )
@@ -30,14 +31,14 @@ function ArrowButton({ to, href, onClick, type = 'button', variant = 'dark', chi
 
   if (href) {
     return (
-      <a href={href} className="arrow-btn-wrap">
+      <a href={href} className="arrow-btn-wrap" aria-label={label}>
         {content}
       </a>
     )
   }
 
   return (
-    <button type={type} onClick={onClick} className="arrow-btn-wrap">
+    <button type={type} onClick={onClick} className="arrow-btn-wrap" aria-label={label}>
       {content}
     </button>
   )

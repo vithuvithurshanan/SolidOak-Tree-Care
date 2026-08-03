@@ -12,6 +12,7 @@ import Terms from './pages/Terms'
 import NotFound from './pages/NotFound'
 
 function App() {
+  
   return (
     <>
       <Navbar />

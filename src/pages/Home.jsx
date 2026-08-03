@@ -94,7 +94,7 @@ function Home() {
             </div>
 
             <div className="hero-cta-card">
-              <h5>Want tree work done? Click here.</h5>
+              <p className="hero-cta-text">Want tree work done? Click here.</p>
               <ArrowButton
                 onClick={() =>
                   document
@@ -133,10 +133,10 @@ function Home() {
                 <div className="service-tile-medallion">
                   <span aria-hidden="true">{service.icon}</span>
                 </div>
-                <h4>{service.title}</h4>
+                <h3 className="service-tile-title">{service.title}</h3>
                 <p className="service-tile-summary">{service.summary}</p>
                 <div className="service-tile-btn">
-                  <ArrowButton to="/services" variant="light">
+                  <ArrowButton to="/services" variant="light" ariaLabel={`Learn more about ${service.title}`}>
                     Learn More
                   </ArrowButton>
                 </div>
@@ -164,7 +164,7 @@ function Home() {
                         : `${(checklistItems.length - 1 - i) * 60}ms`,
                     }}
                   >
-                    <h4>{text}</h4>
+                    <p className="sticky-note-text">{text}</p>
                   </li>
                 ))}
               </ul>
@@ -217,7 +217,7 @@ function Home() {
                 </div>
                 <div className="project-detail-block">
                   <div className="pill">{project.category}</div>
-                  <h4>{project.title}</h4>
+                  <h3 className="project-title">{project.title}</h3>
                   <p>{project.excerpt}</p>
                 </div>
               </div>

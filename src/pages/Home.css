@@ -24,7 +24,7 @@
       rgba(0, 50, 40, 0.45) 0%,
       rgba(4, 30, 25, 0.85) 100%
     ),
-    url('/images/hero.png') center/cover no-repeat;
+    url('/images/hero.webp') center/cover no-repeat;
   color: #fff;
   padding: 48px;
   display: flex;
@@ -163,7 +163,8 @@
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
 }
 
-.hero-cta-card h5 {
+.hero-cta-card h5,
+.hero-cta-card .hero-cta-text {
   margin: 0;
   font-size: 1.1rem;
   font-weight: 600;
@@ -270,15 +271,16 @@
   margin-bottom: 4px;
 }
 
-.service-tile h4 {
+.service-tile h4,
+.service-tile-title {
   color: #fff;
   margin: 0;
   font-size: 1.35rem;
 }
 
 .service-tile-summary {
-  font-size: 0.88rem;
-  color: rgba(255, 255, 255, 0.85);
+  font-size: 0.9rem;
+  color: #fff;
   line-height: 1.4;
   margin: 0;
 }
@@ -366,7 +368,8 @@
 }
 
 /* Sticky note style */
-.feature-checklist h4 {
+.feature-checklist h4,
+.feature-checklist .sticky-note-text {
   color: #3a3000;
   background: #f5e642;
   padding: 14px 28px;
@@ -377,9 +380,9 @@
   box-shadow:
     3px 3px 8px rgba(0, 0, 0, 0.25),
     0 1px 0 rgba(0, 0, 0, 0.08) inset;
-  position: relative;
   font-family: 'Georgia', serif;
   letter-spacing: 0.01em;
+  font-weight: 600;
 }
 
 @media (max-width: 860px) {
@@ -422,7 +425,8 @@
     transform: rotate(1.5deg) !important;
   }
 
-  .feature-checklist h4 {
+  .feature-checklist h4,
+  .feature-checklist .sticky-note-text {
     white-space: normal;
     word-break: break-word;
     font-size: 1rem;
@@ -438,10 +442,10 @@
 }
 
 /* Slightly different tints for variety */
-.sticky-note-0 h4 { background: #f5e642; }
-.sticky-note-1 h4 { background: #85e89d; color: #0a2e0a; }
-.sticky-note-2 h4 { background: #f5b8a0; color: #3a0f00; }
-.sticky-note-3 h4 { background: #a8d8f0; color: #082040; }
+.sticky-note-0 h4, .sticky-note-0 .sticky-note-text { background: #f5e642; color: #3a3000; }
+.sticky-note-1 h4, .sticky-note-1 .sticky-note-text { background: #85e89d; color: #0a2e0a; }
+.sticky-note-2 h4, .sticky-note-2 .sticky-note-text { background: #f5b8a0; color: #3a0f00; }
+.sticky-note-3 h4, .sticky-note-3 .sticky-note-text { background: #a8d8f0; color: #082040; }
 
 /* Feature button — also animates in */
 .feature-button {
@@ -535,7 +539,8 @@
   font-size: 0.85rem;
   text-transform: uppercase;
   letter-spacing: 0.04em;
-  opacity: 0.88;
+  opacity: 1;
+  color: #fff;
 }
 
 /* Projects slider */
@@ -580,7 +585,8 @@
   justify-content: center;
 }
 
-.project-detail-block h4 {
+.project-detail-block h4,
+.project-detail-block .project-title {
   margin: 0;
   font-size: 1.2rem;
 }
